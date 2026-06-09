@@ -1,0 +1,90 @@
+--[[ Ames Guide v1.0.0 © HK★TMK - 2026
+  Licensed under GNU AGPLv3
+
+  Options are marked with ⚙️ so you can Ctrl-F them better.]]
+
+local function textify(x) return pandoc.utils.stringify(x) end
+
+function Writer(doc, opts)
+
+  local rows = {}
+
+  local function addrow(a, b, c)
+    -- a is column 1 w/ the IDs, b is column 2 w/ the lettering source, and c is column 3 w/ the lettering line.
+    table.insert(rows, table.concat({a or "", b or "", c or ""}, "\t"))
+  end
+
+  --[[ ⚙️ Named Pages ↓
+  (If you'd rather display pages by full name, uncomment the line below here and re-comment the line below Auto Pages.)]]
+  -- local page = ""
+  -- ⚙️ Auto Pages ↓
+  local page = 0
+  local speaker = ""
+  local line = 0
+
+  -- The main function!!
+  for _, block in ipairs(doc.blocks) do
+
+    -- We want headers, yes we do—we want headers, how 'bout you.
+    if block.t == "Header" then
+
+      -- ⚙️ Select the heading level that represents pages in your doc. For me it's heading 1.
+      if block.level == 1 then
+        --[[ ⚙️ Named Pages ↓
+  (If you'd rather display pages by full name, uncomment the line below here and re-comment the line below Auto Pages.)]]
+        -- page = textify(block.content)
+        -- ⚙️ Auto Pages ↓
+        page = page + 1
+        line = 0
+
+        -- ⚙️ Comment off/on to toggle if you do/don't want blank rows as page separators.
+        addrow("", "", "")
+
+        -- ⚙️ Select the heading level that represents lettering element SOURCES (Speakers, SFX, Captions), not the lettering lines themselves. For me, this is heading level 3, skipping over 2, which represents panels.
+      elseif block.level == 3 then
+        -- We're basically just yoinking the text inside to shove into column 2 w/ this speaker variable.
+        speaker = textify(block.content)
+      end
+
+    -- Onto ordered lists, cause I like numbering my letters, even in the source script.
+    elseif block.t == "OrderedList" then
+
+      for _, item in ipairs(block.content) do
+
+        -- Bump up the line number for each list item.
+        line = line + 1
+
+        -- Make a row!
+        addrow( -- We put the page number from the last page we crossed, a ., and then the line number.
+        page .. "." .. tostring(line), -- Then the name of the lettering element source.
+        speaker, -- Finally we convert the line to plain text and shove it in.
+        textify(item))
+      end
+
+    -- PanDoc interprets my tabbed in SFX and Caption lines as block quotes!
+    elseif block.t == "BlockQuote" then
+      local blocks = block.content
+
+      local kind = textify(blocks[1])
+
+      -- For each PanDoc block in the BlockQuote
+      for i = 1, #blocks do
+
+        -- Increase the line number
+        line = line + 1
+
+        -- Make col1 the page.line number ID thing, col2 the lettering item source, and col 3 the line itself.
+        addrow(page .. "." .. tostring(line), kind, textify(blocks[i]))
+      end
+    end
+  end
+
+  -- Sometimes, especially for WIP scripts, unfilled pages, become empty lines. This makes sure there's no double-empty lines.
+  -- Here's where the cleaned table will go. 
+  local tidy_table = {}
+  -- We'll use this to compare the current row to the prev row.
+  local prev = nil
+
+  -- Send out the table.
+  return table.concat(rows, "\n")
+end
