@@ -1,7 +1,15 @@
 # Pandoc Comic Script Parsers for Faster Lettering
 
+## Intro
+
 [Hello World!](https://www.youtube.com/watch?v=B2o2__BqY9c)
 
-These are Pandoc LUA Writers for parsing comic scripts for digital lettering. Instead of copy-pasting dialogue and sound effects manually from your comic script, you can convert your robust comic script into a table with one-row-per-line for easy importing into lettering and cartooning tools like Illustrator, Indesign, and Clip Studio Paint.
+These are Pandoc LUA Writers for parsing comic scripts for digital lettering. Instead of copy-pasting dialogue and sound effects manually from your comic script, you can convert your robust `.DOCX`, `.ODT`, or `.MD` comic script into a `.TSV` table with one-row-per-line for easy importing into lettering and cartooning tools like Illustrator, Indesign, and Clip Studio Paint.
 
 Need to learn more? [Peep the wiki!](https://github.com/hikatamika/comic-script-pandoc/wiki)
+
+## Sections
+
+### [📁 Writers](/writers/)
+This is where you'll find the individual Pandoc Writers that can translate your script into tables for you.  
+For more information on how to use them, visit the [Writers page on the wiki](/comic-script-pandoc.wiki/about/Writers.md).
