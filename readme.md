@@ -2,4 +2,4 @@
 
 Pandoc LUA Writers for parsing comic scripts for digital lettering.
 
-Developed and curated by… ya boi. Hika "HK★TMK" P. 
+[Peep the wiki!](https://github.com/hikatamika/comic-script-pandoc/wiki)
