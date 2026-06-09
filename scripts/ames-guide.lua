@@ -15,7 +15,7 @@ function Writer(doc, opts)
   end
 
   --[[ ⚙️ Named Pages ↓
-  (If you'd rather display pages by full name, uncomment the line below here and re-comment the line below Auto Pages.)]]
+  (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
   -- local page = ""
   -- ⚙️ Auto Pages ↓
   local page = 0
@@ -25,21 +25,26 @@ function Writer(doc, opts)
   -- The main function!!
   for _, block in ipairs(doc.blocks) do
 
-    -- We want headers, yes we do—we want headers, how 'bout you.
+    -- If we come across a header
     if block.t == "Header" then
 
+      -- That's a page header
       -- ⚙️ Select the heading level that represents pages in your doc. For me it's heading 1.
       if block.level == 1 then
+        -- Update page ID.
         --[[ ⚙️ Named Pages ↓
-  (If you'd rather display pages by full name, uncomment the line below here and re-comment the line below Auto Pages.)]]
+  (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
         -- page = textify(block.content)
         -- ⚙️ Auto Pages ↓
         page = page + 1
+        -- and reset line number.
         line = 0
 
+        -- Optional per-page line separator.
         -- ⚙️ Comment off/on to toggle if you do/don't want blank rows as page separators.
         addrow("", "", "")
 
+        -- If we come across a header that's a speaker/caption/SFX header
         -- ⚙️ Select the heading level that represents lettering element SOURCES (Speakers, SFX, Captions), not the lettering lines themselves. For me, this is heading level 3, skipping over 2, which represents panels.
       elseif block.level == 3 then
         -- We're basically just yoinking the text inside to shove into column 2 w/ this speaker variable.
@@ -49,12 +54,13 @@ function Writer(doc, opts)
     -- Onto ordered lists, cause I like numbering my letters, even in the source script.
     elseif block.t == "OrderedList" then
 
+      -- for every numbered dialog line
       for _, item in ipairs(block.content) do
 
-        -- Bump up the line number for each list item.
+        -- Bump up the line ID number in the table.
         line = line + 1
 
-        -- Make a row!
+        -- Print to a row!
         addrow( -- We put the page number from the last page we crossed, a ., and then the line number.
         page .. "." .. tostring(line), -- Then the name of the lettering element source.
         speaker, -- Finally we convert the line to plain text and shove it in.
@@ -67,7 +73,7 @@ function Writer(doc, opts)
 
       local kind = textify(blocks[1])
 
-      -- For each PanDoc block in the BlockQuote
+      -- For each line block in the BlockQuote
       for i = 1, #blocks do
 
         -- Increase the line number
@@ -81,10 +87,18 @@ function Writer(doc, opts)
 
   -- Sometimes, especially for WIP scripts, unfilled pages, become empty lines. This makes sure there's no double-empty lines.
   -- Here's where the cleaned table will go. 
-  local tidy_table = {}
+  local tidy_rows = {}
   -- We'll use this to compare the current row to the prev row.
   local prev = nil
 
-  -- Send out the table.
-  return table.concat(rows, "\n")
+  for _, rows_item in ipairs(rows) do
+    if rows_item ~= prev then
+      table.insert(tidy_rows, rows_item)
+      prev = rows_item
+    end
+  end
+
+  --[[ ⚙️ Send out the final table.
+    Use tidy_rows to remove duplicates, or rows if you might have characters that may say the same thing twice in a row.]]
+  return table.concat(tidy_rows, "\n")
 end
