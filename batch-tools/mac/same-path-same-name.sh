@@ -5,7 +5,6 @@
 for file in "$@"; do
     echo "Converting \"$file\"..."
 
-    # Get filename without extension
     base="${file%.*}"
 
     # Change docx to your starting filetype on the -f line.
