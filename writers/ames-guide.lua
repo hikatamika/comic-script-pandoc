@@ -7,8 +7,10 @@ local function textify(x) return pandoc.utils.stringify(x) end
 
 function Writer(doc, opts)
 
+  -- This is the LUA table that collects stuff for your comic lettering table as it reads your script.
   local rows = {}
 
+  -- Here's the function that adds stuff to your comic lettering table row by row. The if/then stuff further down sends stuff to this.
   local function addrow(a, b, c)
     -- a is column 1 w/ the IDs, b is column 2 w/ the lettering source, and c is column 3 w/ the lettering line.
     table.insert(rows, table.concat({a or "", b or "", c or ""}, "\t"))
@@ -28,10 +30,10 @@ function Writer(doc, opts)
     -- If we come across a header
     if block.t == "Header" then
 
-      -- That's a page header
+      -- That's a Comic Script Page Element
       -- ⚙️ Select the heading level that represents pages in your doc. For me it's heading 1.
       if block.level == 1 then
-        -- Update page ID.
+        -- Update page ID. Comes in Named Pages and Auto Pages
         --[[ ⚙️ Named Pages ↓
   (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
         -- page = textify(block.content)
@@ -44,14 +46,14 @@ function Writer(doc, opts)
         -- ⚙️ Comment off/on to toggle if you do/don't want blank rows as page separators.
         addrow("", "", "")
 
-        -- If we come across a header that's a speaker/caption/SFX header
+        -- If we come across a header that's a Comic Script Speaker/Caption/SFX Element
         -- ⚙️ Select the heading level that represents lettering element SOURCES (Speakers, SFX, Captions), not the lettering lines themselves. For me, this is heading level 3, skipping over 2, which represents panels.
       elseif block.level == 3 then
         -- We're basically just yoinking the text inside to shove into column 2 w/ this speaker variable.
         speaker = textify(block.content)
       end
 
-    -- Onto ordered lists, cause I like numbering my letters, even in the source script.
+    -- Onto ordered lists as Dialog line lettering elements.
     elseif block.t == "OrderedList" then
 
       -- for every numbered dialog line
@@ -67,7 +69,7 @@ function Writer(doc, opts)
         textify(item))
       end
 
-    -- PanDoc interprets my tabbed in SFX and Caption lines as block quotes!
+    -- PanDoc interprets my tabbed in SFX and Caption lines as block quotes! Unnumbered dialog can also be interpreted as block quotes by Pandoc.
     elseif block.t == "BlockQuote" then
       local blocks = block.content
 
