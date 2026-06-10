@@ -11,8 +11,8 @@ if (-not $OutputFile) {
 }
 
 (Get-Content $InputFile -Raw) `
-    -replace '--\[\[[^\]]*]]\r?\n*', '' `
-    -replace '(?m) +--.*\r?\n', '' `
+    -replace '--\[\[[^\]]*]]\r?\n*' `
+    -replace '(?m) +--.*\r?\n' `
     -replace '(?<=\S)( {2,})', ' ' `
     -replace '\( ', '(' `
     -replace '^\r?\n+|\r?\n+$' |
