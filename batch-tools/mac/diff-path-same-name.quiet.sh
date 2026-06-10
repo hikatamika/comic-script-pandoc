@@ -3,6 +3,7 @@ mkdir -p "$DEST"
 
 for file in "$@"; do
     echo "Converting \"$file\"..."
+
     filename=$(basename "$file")
     basename_no_ext="${filename%.*}"
     pandoc -f docx "$file" \
