@@ -18,4 +18,4 @@ For more information on how to use them, visit the [Writers page on the wiki](/c
 This is where you'll find filters for common comic script tasks, like converting em-dashes (—) into double-dashes (--).
 
 ### [📁 Batch Tools](/batch-tools/)
-Here are some batch tools you can use for easier processing of multiple scripts at once. You can drag and drop a whole bunch onto an icon to convert them with Pandoc!
+Here are some batch tools you can use for easier processing of multiple scripts at once. You can drag and drop a one or more comic scripts onto a shortcut icon to convert them with Pandoc! (This is great for if you don't want to use Pandoc via command line…!)
