@@ -13,3 +13,9 @@ Need to learn more? [Peep the wiki!](https://github.com/hikatamika/comic-script-
 ### [📁 Writers](/writers/)
 This is where you'll find the individual Pandoc Writers that can translate your script into tables for you.  
 For more information on how to use them, visit the [Writers page on the wiki](/comic-script-pandoc.wiki/about/Writers).
+
+### [📁 Filters](/filters/)
+This is where you'll find filters for common comic script tasks, like converting em-dashes (—) into double-dashes (--).
+
+### [📁 Batch Tools](/batch-tools/)
+Here are some batch tools you can use for easier processing of multiple scripts at once. You can drag and drop a whole bunch onto an icon to convert them with Pandoc!
