@@ -1,7 +1,3 @@
-#!/bin/bash
-
-# Paste this file into an Automator Application
-
 for file in "$@"; do
     echo "Converting \"$file\"..."
 
