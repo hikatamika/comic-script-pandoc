@@ -88,7 +88,7 @@ function Writer(doc, opts)
   end
 
   -- Sometimes, especially for WIP scripts, unfilled pages, become empty lines. This makes sure there's no double-empty lines.
-  -- Here's where the cleaned table will go. 
+  -- Here's where the cleaned table will go.
   local tidy_rows = {}
   -- We'll use this to compare the current row to the prev row.
   local prev = nil
