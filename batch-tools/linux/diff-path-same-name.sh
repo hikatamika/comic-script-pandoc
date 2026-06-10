@@ -13,8 +13,8 @@ for file in "$@"; do
     basename_no_ext="${filename%.*}"
 
     # Change docx to your starting filetype on the -f line.
-    # I highly recommend putting the lua writer next to your Automator app.
-    # Use the absolute path for your lua writer if it's not next to your Automator app.
+    # I highly recommend putting the lua writer next to your Linux launcher.
+    # Use the absolute path for your lua writer if it's not next to your Linux launcher.
     # Either change your lua writer's name to writer.lua, or, put the name of the writer.lua you want on the -t line.
     # The output on the -o line is done for you.
     pandoc -f docx "$file" \
