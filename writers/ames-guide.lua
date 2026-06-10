@@ -3,7 +3,10 @@
 
   Options are marked with ⚙️ so you can Ctrl-F them better.]]
 
-local function textify(x) return pandoc.utils.stringify(x) end
+  -- Shorthand for Pandoc's stringify utility, with the bonus of getting rid of the rare (currently) inexplicable Pandoc ending spaces.
+local function textify(x)
+  return (pandoc.utils.stringify(x):gsub("%s+$", ""))
+end
 
 function Writer(doc, opts)
 
