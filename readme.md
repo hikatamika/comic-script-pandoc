@@ -12,4 +12,4 @@ Need to learn more? [Peep the wiki!](https://github.com/hikatamika/comic-script-
 
 ### [📁 Writers](/writers/)
 This is where you'll find the individual Pandoc Writers that can translate your script into tables for you.  
-For more information on how to use them, visit the [Writers page on the wiki](/comic-script-pandoc.wiki/about/Writers.md).
+For more information on how to use them, visit the [Writers page on the wiki](/comic-script-pandoc.wiki/about/Writers).
