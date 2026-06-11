@@ -43,8 +43,6 @@ function Writer(doc, opts)
     elseif block.t == "BlockQuote" then
       local blocks = block.content
 
-      local kind = textify(blocks[1])
-
       for i = 1, #blocks do
 
         line = line + 1
