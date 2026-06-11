@@ -1,6 +1,6 @@
 # Pandoc Comic Script Transformers for Faster Lettering
 
-Pandoc LUA Writers for transforming comic scripts for easier digital lettering.
+Pandoc LUA Writers that transform comic scripts for easier digital lettering.
 
 ## Intro
 
