@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Paste this file into an Automator Application
+# Paste this file into an Automator Application made for your project, or, preferred Pandoc Lua Writer and save destination.
 
 # Destination folder. Change it if you want your stuff to go somewhere else.
 DEST="$HOME/DestinationFolder"
@@ -15,10 +15,11 @@ for file in "$@"; do
     basename_no_ext="${filename%.*}"
 
     # Change docx to your starting filetype on the -f line.
-    # I highly recommend putting the lua writer next to your automator app.
-    # Use the absolute path for your lua writer if it's not next to your automator app.
-    # Either change your lua writer's name to writer.lua, or, put the name of the writer.lua you want on the -t line.
+    # Put the name of the writer.lua you want on the -t line.
+    # I highly recommend putting the Pandoc Lua Writer in Pandoc's data directory,
+    # …or next to your Linux launcher so you don't have to link it by absolute path.
     # The output on the -o line is done for you.
+    # Change .tsv to another file extension if need be.
     pandoc -f docx "$file" \
            -t writer.lua \
            -o "$DEST/${basename_no_ext}.tsv"
