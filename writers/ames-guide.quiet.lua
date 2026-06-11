@@ -34,7 +34,10 @@ function Writer(doc, opts)
 
         line = line + 1
 
-        addrow(page .. "." .. tostring(line), speaker, textify(item))
+        addrow(
+        page .. "." .. tostring(line),
+        speaker,
+        textify(item))
       end
 
     elseif block.t == "BlockQuote" then
@@ -46,7 +49,7 @@ function Writer(doc, opts)
 
         line = line + 1
 
-        addrow(page .. "." .. tostring(line), kind, textify(blocks[i]))
+        addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
     end
   end

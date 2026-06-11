@@ -66,9 +66,12 @@ function Writer(doc, opts)
         line = line + 1
 
         -- Print to a row!
-        addrow( -- We put the page number from the last page we crossed, a ., and then the line number.
-        page .. "." .. tostring(line), -- Then the name of the lettering element source.
-        speaker, -- Finally we convert the line to plain text and shove it in.
+        addrow(
+        -- We put the page number from the last page we crossed, a ., and then the line number.
+        page .. "." .. tostring(line),
+        -- Then the name of the lettering element source.
+        speaker,
+        -- Finally we convert the line to plain text and shove it in.
         textify(item))
       end
 
@@ -85,7 +88,7 @@ function Writer(doc, opts)
         line = line + 1
 
         -- Make col1 the page.line number ID thing, col2 the lettering item source, and col 3 the line itself.
-        addrow(page .. "." .. tostring(line), kind, textify(blocks[i]))
+        addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
     end
   end
