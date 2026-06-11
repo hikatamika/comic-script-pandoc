@@ -58,6 +58,11 @@
 		"emeraldwalk.runonsave": {
 			"commands": [
 				{
+					// Ensure .Desktop launchers are Linux friendly
+					"match": "\\.desktop$",
+					"cmd": "npm run to-linux -- ${relativeFile}"
+				},
+				{
 					// Make a Quiet copy of a LUA file
 					"match": "writers\\\\.*\\.lua$",
 					"notMatch": "writers\\\\.*\\.quiet\\.lua$",

@@ -7,17 +7,9 @@ const args = process.argv.slice(2);
 const inputFile = args[0];
 let outputFile = args[1]; 
 
-if (!inputFile) {
-    console.error("Error: Input file path is required.");
-    console.error("Usage: node unix-friendly.js <inputFile> [outputFile]");
-    process.exit(1);
-}
-
-// Default output file name if not provided
+// Default output file name if not provided (overwrites the input file)
 if (!outputFile) {
-    const ext = path.extname(inputFile);
-    const base = path.basename(inputFile, ext);
-    outputFile = path.join(path.dirname(inputFile), `${base}.sh`);
+    outputFile = inputFile;
 }
 
 try {
