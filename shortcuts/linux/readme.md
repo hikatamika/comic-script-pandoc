@@ -1,4 +1,4 @@
-## Linux Batch Tools
+## Linux Batch Shortcuts
 
 1. With these you're gonna want to pick one `.sh` and its matching `.desktop`.
 2. When you're using them, they should be in the same folder.

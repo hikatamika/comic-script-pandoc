@@ -1,4 +1,4 @@
-## Mac Batch Tools
+## Mac Batch Shortcuts
 These are bash scripts for the Mac app Automator…
 
 …so IDK how they work if you just run them in terminal.

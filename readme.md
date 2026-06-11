@@ -22,5 +22,5 @@ For more information on how to use them, visit the [Writers page on the wiki](/c
 ### 2. [📁 Filters](/filters/) (Optional)
 Small tweaks for common comic script tasks, like automatically converting em-dashes (—) into double-dashes (--), and more.
 
-### 3. [📁 Batch Tools](/batch-tools/)
+### 3. [📁 Shortcuts](/shortcuts/)
 Quick drag-and-drop shortcuts for **Windows, Mac, and Linux**. Drag your files over these to convert one script or an entire batch at once without ever touching the command line!
