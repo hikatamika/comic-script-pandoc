@@ -1,0 +1,21 @@
+{
+  "name": "comic-script-pandoc",
+  "version": "0.2.0",
+  "description": "Pandoc LUA Writers for parsing comic scripts for digital lettering.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "to-linux": "node dev/general/to-linux.js",
+    "quiet-bat": "node dev/quiet/quiet-bat.js",
+    "quiet-lua": "node dev/quiet/quiet-lua.js",
+    "quiet-sh-linux": "node dev/quiet/quiet-sh-linux.js",
+    "quiet-sh-mac": "node dev/quiet/quiet-sh-mac.js"
+  },
+  "keywords": [],
+  "author": "Hika \"HK★TMK\" P.",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "dependencies": {
+    "replace-in-file": "^8.4.0"
+  }
+}

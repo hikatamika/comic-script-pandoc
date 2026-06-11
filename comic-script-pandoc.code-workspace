@@ -1,0 +1,88 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"vscode-lua-format.configPath": ".ignore/lua-lint.lua",
+		"vscode-lua-minify.flavour": "lua-format",
+		"replacerules.rules": {
+			"Remove Double Blanks": {
+				"find": "(\\n\\s*){3,}",
+				"replace": "\n\n"
+			},
+			"Remove Trailing Starts/Ends": {
+				"find": "^\\s+|\\s+$",
+				"replace": "",
+				"flags": "g"
+			},
+			"Remove Double Spaces": {
+				"find": " {2,}",
+				"replace": " "
+			},
+			"Remove Long LUA Comments": {
+				"find": "--\\[\\[[^\\]]*]]\n*",
+				"replace": "",
+				"flags": "gms"
+			},
+			"Remove Short LUA Comments": {
+				"find": "^.*--.*$\n",
+				"replace": ""
+			},
+			"Remove Batch Comments": {
+				"find": "^@REM.*\n+",
+				"replace": ""
+			}
+		},
+		"replacerules.rulesets": {
+			"Blanks-B-Gone": {
+				"rules": [
+					"Remove Double Blanks",
+					"Remove Trailing Starts/Ends"
+				]
+			},
+			"Remove Lua Comments": {
+				"rules": [
+					"Remove Long LUA Comments",
+					"Remove Short LUA Comments"
+				]
+			}
+		},
+		"files.exclude": {},
+		"cSpell.words": [
+			"Pandoc",
+			"skimmable",
+			"Steenz's"
+		],
+		"emeraldwalk.runonsave": {
+			"commands": [
+				{
+					// Make a Quiet copy of a LUA file
+					"match": "writers\\\\.*\\.lua$",
+					"notMatch": "writers\\\\.*\\.quiet\\.lua$",
+					"cmd": "npm run quiet-lua -- ${relativeFile}"
+				},
+				{
+					// Make a Quiet copy of a BAT file
+					"match": "shortcuts\\\\windows\\\\.*\\.bat$",
+					"notMatch": "shortcuts\\\\windows\\\\.*\\.quiet\\.bat$",
+					// "cmd": "powershell -File .ignore\\dev\\quiet-bat.ps1 ${relativeFile}"
+					"cmd": "npm run quiet-bat -- ${relativeFile}"
+				},
+				{
+					// Make a Quiet copy of a Mac .SH file
+					"match": "shortcuts\\\\mac\\\\.*\\.sh$",
+					"notMatch": "shortcuts\\\\mac\\\\.*\\.quiet\\.sh$",
+					"cmd": "npm run to-linux -- ${relativeFile} && npm run quiet-sh-mac -- ${relativeFile}"
+				},
+				{
+					// Make a Linux friendly file and a quiet copy of a Linux .SH file
+					"match": "shortcuts\\\\linux\\\\.*\\.sh$",
+					"notMatch": "shortcuts\\\\linux\\\\.*\\.quiet\\.sh$",
+					"cmd": "npm run to-linux -- ${relativeFile} && npm run quiet-sh-linux -- ${relativeFile}"
+				}
+			]
+		}
+	}
+}
