@@ -1,21 +1,25 @@
 # Pandoc Comic Script Transformers for Faster Lettering
 
+Pandoc LUA Writers for transforming comic scripts for easier digital lettering.
+
 ## Intro
 
 [Hello World!](https://www.youtube.com/watch?v=B2o2__BqY9c)
 
-These are Pandoc LUA Writers for transforming comic scripts for digital lettering. Instead of copy-pasting dialogue and sound effects manually from your comic script, you can convert your robust `.DOCX`, `.ODT`, or `.MD` comic script into a `.TSV` table with one-row-per-line for easy importing into lettering and cartooning tools like Illustrator, Indesign, and Clip Studio Paint.
+Instead of manually copy-pasting or re-typing dialogue and sound effects from your comic script, convert your formatted **`.DOCX`, `.ODT`, or `.MD`** scripts into a spreadsheet table with just the dialog; one-row-per-line. Then, easily import your table into **Illustrator, InDesign, or Clip Studio Paint,** which can each automatically split your dialogue and populate text frames for your comic!
+
+The best part… you don't even have to touch command line… Just edit a few options in the code, then drag and drop your file(s) onto a shortcut icon. Easy-peasy.
 
 Need to learn more? [Peep the wiki!](https://github.com/hikatamika/comic-script-pandoc/wiki)
 
 ## Sections
 
 ### [📁 Writers](/writers/)
-This is where you'll find the individual Pandoc Writers that can translate your script into tables for you.  
+These are the tools that turn your script into a readable spreadsheet. They handle organizing your text so you can move it into your art software easily.
 For more information on how to use them, visit the [Writers page on the wiki](/comic-script-pandoc.wiki/about/Writers).
 
 ### [📁 Filters](/filters/)
-This is where you'll find filters for common comic script tasks, like converting em-dashes (—) into double-dashes (--).
+Small tweaks for common comic script tasks, like automatically converting em-dashes (—) into double-dashes (--), and more.
 
 ### [📁 Batch Tools](/batch-tools/)
-Here are some batch tools you can use for easier processing of multiple scripts at once. You can drag and drop a one or more comic scripts onto a shortcut icon to convert them with Pandoc! (This is great for if you don't want to use Pandoc via command line…!)
+Quick drag-and-drop shortcuts for Windows, Mac, and Linux. Use these to convert one script or an entire group at once without ever touching the command line!
