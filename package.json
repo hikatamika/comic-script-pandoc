@@ -5,6 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "push": "npm version patch && git push",
+    "push-minor": "npm version minor && git push",
+    "push-major": "npm version major && git push",
+    "tag": "node dev/build/tag-version.js",
+    "build-dir": "node dev/build/build-folder.js",
     "to-linux": "node dev/general/to-linux.js",
     "quiet-bat": "node dev/quiet/quiet-bat.js",
     "quiet-lua": "node dev/quiet/quiet-lua.js",
