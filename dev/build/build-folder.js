@@ -136,36 +136,41 @@ const foldersToZip = [
   ...topLvlBuildDirs.map(osName => topFolderPrefix(`${osName}`)),
   topFolderPrefix(`Example Scripts`)
 ];
+
+function zipFolder(folderPath, zipOutputPath, label) {
+  return new Promise((resolve, reject) => {
+    const output = createWriteStream(zipOutputPath);
+    const zipper = new ZipArchive({ zlib: { level: 9 } });
+
+    output.on('close', () => resolve(zipper.pointer()));
+    output.on('error', reject);
+
+    zipper.on('error', reject);
+
+    zipper.pipe(output);
+    zipper.directory(folderPath, false);
+    zipper.finalize();
+  }).then((bytes) => {
+    console.log(`Zipped ${label}: ${bytes} bytes`);
+
+    rmSync(folderPath, { recursive: true, force: true });
+    console.log(`Deleted ${label}`);
+  });
+}
+
+for (const folderName of foldersToZip) {
   const folderPath = resolve(buildTargetDir, folderName);
   const zipOutputPath = resolve(buildTargetDir, `${folderName}.zip`);
 
-  // Verify the folder exists before attempting to zip
-  if (!existsSync(folderPath)) return;
+  if (!existsSync(folderPath)) {
+    console.warn(`Skipping missing folder: ${folderName}`);
+    continue;
+  }
 
-  const output = createWriteStream(zipOutputPath);
-  const zipper = new ZipArchive({ zlib: { level: 9 } });
-
-  // CRITICAL: Only delete the directory AFTER the write stream has completely closed
-  output.on('close', () => {
-    console.log(`Successfully zipped ${folderName}: ${zipper.pointer()} total bytes`);
-    
-    try {
-      rmSync(folderPath, { recursive: true, force: true });
-      console.log(`Successfully deleted source folder: ${folderName}`);
-    } catch (rmError) {
-      console.error(`Failed to delete source folder ${folderName}:`, rmError.message);
-    }
-  });
-
-  zipper.on('error', (err) => {
-    console.error(`Error zipping ${folderName}:`, err);
-  });
-
-  zipper.pipe(output);
-  
-  // Append contents cleanly
-  zipper.directory(folderPath, false); 
-  
-  zipper.finalize();
-});
+  try {
+    await zipFolder(folderPath, zipOutputPath, folderName);
+  } catch (err) {
+    console.error(`Failed zip for ${folderName}:`, err);
+  }
+}
 //!SECTION - Zipping and Deleting the Build Folders
