@@ -1,4 +1,4 @@
-import { readFileSync, mkdirSync, existsSync, renameSync, cpSync, createWriteStream, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, mkdirSync, existsSync, renameSync, cpSync, createWriteStream, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { ZipArchive } from 'archiver';
@@ -23,14 +23,18 @@ const version = packageJson.version;
 // Get to builds folder
 const buildTargetDir = resolve(projectRoot, '..', 'builds', version);
 
-//
+// Build older structure
 const topLvlBuildDirs = ['Windows', 'Mac', 'Linux'];
 const samePlatDirs = ['pandoc', 'shortcuts'];
 const perPandocFolder = ['custom', 'filters'];
 
-const srcReadme = resolve(projectRoot, 'manual.md');
+const platforms = [
+  { name: 'Windows', shortcutSrc: 'windows' },
+  { name: 'Mac', shortcutSrc: 'mac' },
+  { name: 'Linux', shortcutSrc: 'linux' }
+];
 
-const archive = new ZipArchive({ zlib: { level: 9 } });
+const srcReadme = resolve(projectRoot, 'manual.md');
 
 //!SECTION - Consts
 
@@ -44,47 +48,61 @@ try {
 
     //SECTION - Making the platform folders + filling things that are the same
     // Top Level Folders
-    topLvlBuildDirs.forEach(topFolderBaseName => {
+    platforms.forEach(({ name, shortcutSrc }) => {
       // ComicScriptPandoc
-      const topFolder = `Comic-Script-Pandoc-v${version}-${topFolderBaseName}`; 
+      const topFolder = `${projectName}-v${version}-${name}`;
 
-      mkdirSync(resolve(buildTargetDir, topFolder), { recursive: true });
+      // Common paths
+      const topPath = resolve(buildTargetDir, topFolder);
+      const pandocPath = resolve(topPath, 'pandoc');
+      const customPath = resolve(pandocPath, 'custom');
+      const filtersPath = resolve(pandocPath, 'filters');
+
+      mkdirSync(topPath, { recursive: true });
 
       // The things that are the same per platform: pandoc(empty), shortcuts(empty), and the readmes
       samePlatDirs.forEach(samePlat => {
         // make pandoc and shortcuts
-        mkdirSync(resolve(buildTargetDir, topFolder, samePlat), { recursive: true });
+        mkdirSync(resolve(topPath, samePlat), { recursive: true });
         // Put in the readme
-        cpSync(srcReadme, resolve(buildTargetDir, topFolder, 'readme.md'));
-        cpSync(srcReadme, resolve(buildTargetDir, topFolder, 'readme.txt'));
       });
+
+      cpSync(srcReadme, resolve(topPath, 'readme.md'));
+      cpSync(srcReadme, resolve(topPath, 'readme.txt'));
 
       // Back in pandoc, we fill it
       // Put in custom and filters
-      perPandocFolder.forEach(perPandoc => {
-        mkdirSync(resolve(buildTargetDir, topFolder, 'pandoc', perPandoc), { recursive: true });
-      });
+      mkdirSync(pandocPath, { recursive: true });
+      mkdirSync(customPath, { recursive: true });
+      mkdirSync(filtersPath, { recursive: true });
 
       // Copy the stuff to custom and filters
-      cpSync(resolve(projectRoot, 'writers'), resolve(buildTargetDir, topFolder, 'pandoc', 'custom'), { recursive: true });
-      cpSync(resolve(projectRoot, 'filters'), resolve(buildTargetDir, topFolder, 'pandoc', 'filters'), { recursive: true });
-    });
-    //!SECTION - Making the platform folders + filling things that are the same
+      // For the writers, skip the per-writer-type folder groupings
+      
+      const writersDir = resolve(projectRoot, 'writers');
+      const customDir = customPath;
 
-    //SECTION - Filling Windows
-    const winFolder = `${projectName}-v${version}-Windows`;
-    cpSync(resolve(projectRoot, 'shortcuts/windows'), resolve(buildTargetDir, winFolder, 'shortcuts'), { recursive: true });
-    //!SECTION - Filling Windows
+      for (const writerFolder of readdirSync(writersDir)) {
+        cpSync(
+          resolve(writersDir, writerFolder),
+          customDir,
+          { recursive: true }
+        );
+      }
+
+      cpSync(resolve(projectRoot, 'filters'), filtersPath, { recursive: true });
+
+      //SECTION - Filling the Platforms (While we're here)
+      cpSync(
+        resolve(projectRoot, `shortcuts/${shortcutSrc}`),
+        resolve(buildTargetDir, `topFolder`, 'shortcuts'),
+        { recursive: true }
+      );
+      //!SECTION - Filling the Platforms
+
+    });
     
-    //SECTION - Filling Mac
-    const macFolder = `${projectName}-v${version}-Mac`;
-    cpSync(resolve(projectRoot, 'shortcuts/mac'), resolve(buildTargetDir, macFolder, 'shortcuts'), { recursive: true });  
-    //!SECTION - Filling Mac
-    
-    //SECTION - Filling Linux
-    const linFolder = `${projectName}-v${version}-Linux`;
-    cpSync(resolve(projectRoot, 'shortcuts/linux'), resolve(buildTargetDir, linFolder, 'shortcuts'), { recursive: true });
-    //!SECTION - Filling Linux
+    //!SECTION - Making the platform folders + filling things that are the same
 
     //SECTION - The script example folder
     const exFolder = `${projectName}-v${version}-Example Scripts`;
@@ -95,6 +113,7 @@ try {
   } else {
     console.log(`Folder already exists: ${buildTargetDir}`);
   }
+
 } catch (error) {
   console.error(`Failed to create directory:`, error.message);
   process.exit(1);
