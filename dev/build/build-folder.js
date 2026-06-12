@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, mkdirSync, existsSync, renameSync, statSync, cpSync, createWriteStream, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, mkdirSync, existsSync, statSync, cpSync, createWriteStream, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { ZipArchive } from 'archiver';
