@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "push-patch": "npm version patch && git push",
-    "push-minor": "npm version minor && git push",
-    "push-major": "npm version major && git push",
+    "push-patch": "node dev/general/confirm-run.js && npm version patch && git push",
+    "push-minor": "node dev/general/confirm-run.js && npm version minor && git push",
+    "push-major": "node dev/general/confirm-run.js && npm version major && git push",
     "tag": "node dev/build/tag-version.js",
     "build-dir": "node dev/build/build-folder.js",
     "to-linux": "node dev/general/to-linux.js",
@@ -21,6 +21,7 @@
   "license": "GPL-3.0-or-later",
   "type": "module",
   "dependencies": {
+    "prompts": "^2.4.2",
     "replace-in-file": "^8.4.0"
   }
 }
