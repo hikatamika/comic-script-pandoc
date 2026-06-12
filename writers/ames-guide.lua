@@ -85,7 +85,9 @@ function Writer(doc, opts)
         -- Increase the line number
         line = line + 1
 
-        -- Make col1 the page.line number ID thing, col2 the lettering item source, and col 3 the line itself.
+        -- Make col1 the page.line number ID thing,
+        -- col2 the lettering item source,
+        -- and col 3 the line itself.
         addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
     end
