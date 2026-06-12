@@ -76,6 +76,7 @@ try {
 
     //SECTION - The script example folder
     mkdirSync(resolve(buildTargetDir, 'Example Scripts'), { recursive: true });
+    cpSync(resolve(projectRoot, 'example-scripts'), resolve(buildTargetDir, 'Example Scripts'), { recursive: true });
     //!SECTION - The script example folder
 
   } else {
