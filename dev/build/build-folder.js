@@ -5,20 +5,19 @@ import { ZipArchive } from 'archiver';
 
 //SECTION - Consts
 
+//SECTION - Important Paths
 // Get current file path and dev>build
 const currentDir = dirname(fileURLToPath(import.meta.url));
-
-// Thing so I don't repeat root all the time
-const root = (...paths) => resolve(projectRoot, ...paths);
-
-// Project title
-const projectName = 'Comic-Script-Pandoc'; 
 
 // Hop up two, get to project root
 const projectRoot = resolve(currentDir, '../../');
 
+// Thing so I don't repeat root all the time
+const root = (...paths) => resolve(projectRoot, ...paths);
+
 // Get version from package.json
 const packageJsonPath = root('package.json');
+
 const { version } = JSON.parse(
   readFileSync(packageJsonPath, 'utf8')
 );
@@ -26,6 +25,18 @@ const { version } = JSON.parse(
 // Get to builds folder
 const buildTargetDir = root('..', 'builds', version);
 
+const samePlatDirs = ['pandoc', 'shortcuts'];
+
+const srcReadme = root('manual.md');
+//!SECTION - Important Paths
+
+//SECTION - Proj Meta
+// Project title
+const projectName = 'Comic-Script-Pandoc'; 
+
+//!SECTION - Proj Meta
+
+//SECTION - OSes
 // Build older structure
 const platforms = [
   { name: 'Windows', shortcutSrc: 'windows' },
@@ -34,9 +45,7 @@ const platforms = [
 ];
 
 const topLvlBuildDirs = platforms.map(p => p.name);
-const samePlatDirs = ['pandoc', 'shortcuts'];
-
-const srcReadme = root('manual.md');
+//!SECTION - OSes
 
 //!SECTION - Consts
 
