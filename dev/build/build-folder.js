@@ -17,8 +17,9 @@ const projectRoot = resolve(currentDir, '..', '..');
 
 // Get version from package.json
 const packageJsonPath = resolve(projectRoot, './package.json');
-const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
-const version = packageJson.version;
+const { version } = JSON.parse(
+  readFileSync(packageJsonPath, 'utf8')
+);
 
 // Get to builds folder
 const buildTargetDir = resolve(projectRoot, '..', 'builds', version);
