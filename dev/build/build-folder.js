@@ -79,11 +79,12 @@ try {
       samePlatDirs.forEach(samePlat => {
         // make pandoc and shortcuts
         mkdirSync(resolve(topPath, samePlat), { recursive: true });
-        // Put in the readme
       });
-
-      cpSync(srcReadme, resolve(topPath, 'readme.md'));
-      cpSync(srcReadme, resolve(topPath, 'readme.txt'));
+      
+      // Put in the readme
+      ['md', 'txt'].forEach(ext =>
+        cpSync(srcReadme, resolve(topPath, `readme.${ext}`))
+      );
 
       // Back in pandoc, we fill it
       // Put in custom and filters
