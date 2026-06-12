@@ -8,6 +8,9 @@ import { ZipArchive } from 'archiver';
 // Get current file path and dev>build
 const currentDir = dirname(fileURLToPath(import.meta.url));
 
+// Thing so I don't repeat root all the time
+const root = (...paths) => resolve(projectRoot, ...paths);
+
 // Project title
 const projectName = 'Comic-Script-Pandoc'; 
 
@@ -15,19 +18,15 @@ const projectName = 'Comic-Script-Pandoc';
 const projectRoot = resolve(currentDir, '../../');
 
 // Get version from package.json
-const packageJsonPath = resolve(projectRoot, './package.json');
+const packageJsonPath = root('package.json');
 const { version } = JSON.parse(
   readFileSync(packageJsonPath, 'utf8')
 );
 
 // Get to builds folder
-const buildTargetDir = resolve(projectRoot, '..', 'builds', version);
+const buildTargetDir = root('..', 'builds', version);
 
 // Build older structure
-const topLvlBuildDirs = ['Windows', 'Mac', 'Linux'];
-const samePlatDirs = ['pandoc', 'shortcuts'];
-const perPandocFolder = ['custom', 'filters'];
-
 const platforms = [
   { name: 'Windows', shortcutSrc: 'windows' },
   { name: 'Mac', shortcutSrc: 'mac' },
@@ -37,7 +36,7 @@ const platforms = [
 const topLvlBuildDirs = platforms.map(p => p.name);
 const samePlatDirs = ['pandoc', 'shortcuts'];
 
-const srcReadme = resolve(projectRoot, 'manual.md');
+const srcReadme = root('manual.md');
 
 //!SECTION - Consts
 
@@ -82,7 +81,7 @@ try {
       // Copy the stuff to custom and filters
       // For the writers, skip the per-writer-type folder groupings
       
-      const writersDir = resolve(projectRoot, 'writers');
+      const writersDir = root('writers');
       const customDir = customPath;
 
       for (const writerFolder of readdirSync(writersDir)) {
@@ -93,11 +92,11 @@ try {
         );
       }
 
-      cpSync(resolve(projectRoot, 'filters'), filtersPath, { recursive: true });
+      cpSync(root('filters'), filtersPath, { recursive: true });
 
       //SECTION - Filling the Platforms (While we're here)
       cpSync(
-        resolve(projectRoot, `shortcuts/${shortcutSrc}`),
+        root(`shortcuts/${shortcutSrc}`),
         resolve(buildTargetDir, topFolder, 'shortcuts'),
         { recursive: true }
       );
@@ -110,7 +109,7 @@ try {
     //SECTION - The script example folder
     const exFolder = `${projectName}-v${version}-Example Scripts`;
     mkdirSync(resolve(buildTargetDir, exFolder), { recursive: true });
-    cpSync(resolve(projectRoot, 'example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
+    cpSync(root('example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
     //!SECTION - The script example folder
 
   } else {
