@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, mkdirSync, existsSync, renameSync, cpSync, createWriteStream, rmSync } from 'node:fs';
+import { readFileSync, readdirSync, mkdirSync, existsSync, renameSync, statSync, cpSync, createWriteStream, rmSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { ZipArchive } from 'archiver';
@@ -97,13 +97,19 @@ try {
       const writersDir = root('writers');
       const customDir = customPath;
 
-      for (const writerFolder of readdirSync(writersDir)) {
-        cpSync(
-          resolve(writersDir, writerFolder),
-          customDir,
-          { recursive: true }
-        );
+      function flattenCopy(srcDir, destDir) {
+        for (const entry of readdirSync(srcDir)) {
+          const srcPath = resolve(srcDir, entry);
+
+          if (statSync(srcPath).isDirectory()) {
+            flattenCopy(srcPath, destDir); // recurse
+          } else {
+            cpSync(srcPath, resolve(destDir, entry));
+          }
+        }
       }
+
+      flattenCopy(writersDir, customDir);
 
       cpSync(root('filters'), filtersPath, { recursive: true });
 
