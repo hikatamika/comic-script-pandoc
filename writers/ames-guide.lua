@@ -38,7 +38,7 @@ function Writer(doc, opts)
       if block.level == 1 then
         -- Update page ID. Comes in Named Pages and Auto Pages
         --[[ ⚙️ Named Pages ↓
-  (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
+            (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
         -- page = textify(block.content)
         -- ⚙️ Auto Pages ↓
         page = page + 1
