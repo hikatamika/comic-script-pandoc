@@ -64,7 +64,7 @@ try {
     // Top Level Folders
     platforms.forEach(({ name, shortcutSrc }) => {
       // ComicScriptPandoc
-      const topFolder = `topFolderPrefix(${name})`;
+      const topFolder = topFolderPrefix(`${name}`);
 
       // Common paths
       const topPath = resolve(buildTargetDir, topFolder);
@@ -120,7 +120,7 @@ try {
     //!SECTION - Making the platform folders + filling things that are the same
 
     //SECTION - The script example folder
-    const exFolder = `topFolderPrefix(Example Scripts)`;
+    const exFolder = topFolderPrefix('Example Scripts');
     mkdirSync(resolve(buildTargetDir, exFolder), { recursive: true });
     cpSync(root('example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
     //!SECTION - The script example folder
@@ -133,11 +133,9 @@ try {
 
 //SECTION - Zipping and Deleting the Build Folders
 const foldersToZip = [
-  ...topLvlBuildDirs.map(osName => `${projectName}-v${version}-${osName}`), 
-  `${projectName}-v${version}-Example Scripts`
+  ...topLvlBuildDirs.map(osName => topFolderPrefix(`${osName}`)),
+  topFolderPrefix(`Example Scripts`)
 ];
-
-foldersToZip.forEach(folderName => {
   const folderPath = resolve(buildTargetDir, folderName);
   const zipOutputPath = resolve(buildTargetDir, `${folderName}.zip`);
 
