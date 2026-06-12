@@ -49,6 +49,11 @@ function Writer(doc, opts)
 
         addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
+
+      elseif block.t == "Para" then
+        line = line + 1
+  
+        addrow(page .. "." .. tostring(line), speaker, textify(block))
     end
   end
 

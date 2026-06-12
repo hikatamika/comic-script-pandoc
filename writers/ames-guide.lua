@@ -90,6 +90,16 @@ function Writer(doc, opts)
         -- and col 3 the line itself.
         addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
+
+      -- Sometimes, SFX and Captions are read as paragraphs
+      elseif block.t == "Para" then
+        -- Increase the line number
+        line = line + 1
+  
+        -- Make col1 the page.line number ID thing,
+        -- col2 the lettering item source,
+        -- and col3 the paragraph text.
+        addrow(page .. "." .. tostring(line), speaker, textify(block))
     end
   end
 
