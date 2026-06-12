@@ -6,8 +6,7 @@ import { ZipArchive } from 'archiver';
 //SECTION - Consts
 
 // Get current file path and dev>build
-const __filename = fileURLToPath(import.meta.url);
-const currentDir = dirname(__filename);
+const currentDir = dirname(fileURLToPath(import.meta.url));
 
 // Project title
 const projectName = 'Comic-Script-Pandoc'; 
