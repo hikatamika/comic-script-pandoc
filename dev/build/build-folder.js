@@ -126,7 +126,7 @@ try {
     //!SECTION - Making the platform folders + filling things that are the same
 
     //SECTION - The script example folder
-    const exFolder = topFolderPrefix('Example Scripts');
+    const exFolder = topFolderPrefix('Example-Scripts');
     mkdirSync(resolve(buildTargetDir, exFolder), { recursive: true });
     cpSync(root('example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
     //!SECTION - The script example folder
