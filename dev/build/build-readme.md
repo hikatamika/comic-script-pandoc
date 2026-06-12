@@ -23,6 +23,7 @@ AKA `$HOME/.local/share`
 Make an Explorer/Finder/File Browser shortcut for this `pandoc` folder, as you'll likely want to copy, rename, and edit the Pandoc Writers in `custom` to tailor them to your project, keeping the original versions on hand.
 
 In the Writer files, you can Find ⚙️ emojis that'll point you to options you can edit and toggle to tailor them to your comic scripts.
+`.quiet` versions of files are the same files, without any comments, including options comments.
 
 ## "`shortcuts`" Folder — Conversion Shortcuts
 
@@ -35,10 +36,12 @@ I recommend using these as a base; copying and modifying them per comic project.
    - For Windows users, the shortcut is just one file.
    - For Linux users, the `.sh` file of your choice and the `drag-on-me.desktop` launcher work together as one.
 2. Open and edit the shortcut files. Instructions are there to help you know what to edit inside.
+   - `.quiet` versions of files are the same files, without any comments.
 
 ### Mac
 
 1. Open a shortcut file and edit the appropriate parts. Again, there are instructions there to help you know what to change.
+   - `.quiet` versions of files are the same files, without any comments.
 2. Without saving over the file, select all and copy its contents. Then,
 3. Open Automator,
 4. Pick `New Application`,
