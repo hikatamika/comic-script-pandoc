@@ -2,3 +2,6 @@
 /.ignore
 /test
 /node_modules
+
+# Doc Clutter
+*.~lock*
