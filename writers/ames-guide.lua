@@ -1,4 +1,5 @@
---[[ Ames Guide v1.0.0 © HK★TMK - 2026
+--[[ Ames Guide Pandoc Lua Writer
+  https://github.com/hikatamika/comic-script-pandoc
   Licensed under GNU AGPLv3
 
   Options are marked with ⚙️ so you can Ctrl-F them better.]]
