@@ -12,7 +12,7 @@ const currentDir = dirname(fileURLToPath(import.meta.url));
 const projectName = 'Comic-Script-Pandoc'; 
 
 // Hop up two, get to project root
-const projectRoot = resolve(currentDir, '..', '..');
+const projectRoot = resolve(currentDir, '../../');
 
 // Get version from package.json
 const packageJsonPath = resolve(projectRoot, './package.json');
@@ -95,7 +95,7 @@ try {
       //SECTION - Filling the Platforms (While we're here)
       cpSync(
         resolve(projectRoot, `shortcuts/${shortcutSrc}`),
-        resolve(buildTargetDir, `topFolder`, 'shortcuts'),
+        resolve(buildTargetDir, topFolder, 'shortcuts'),
         { recursive: true }
       );
       //!SECTION - Filling the Platforms
