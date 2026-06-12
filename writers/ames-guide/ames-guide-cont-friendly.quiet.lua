@@ -11,6 +11,7 @@ function Writer(doc, opts)
   end
 
   local page = 0
+  local prevNum = nil
   local speaker = ""
   local line = 0
 
@@ -19,7 +20,46 @@ function Writer(doc, opts)
     if block.t == "Header" then
 
       if block.level == 1 then
-        page = page + 1
+        local raw = textify(block.content)
+
+        local function isContinuation(text)
+        text = text:lower()
+
+          return text:find("%(cont%.?%)")
+              or text:find("%(cont'%w+%)")
+              or text:find("cont%.'?d")
+              or text:find("continued")
+              or text:find("con'%w+%s*$")
+        end
+
+        local function normalize(text)
+          text = text:lower()
+
+          text = text:gsub("%(cont%.?%)", "")
+          text = text:gsub("%(cont'%w+%)", "")
+          text = text:gsub("cont%.'?d", "")
+          text = text:gsub("continued", "")
+          text = text:gsub("con'%w+%s*$", "")
+
+          text = text:gsub("%s+", " ")
+          text = text:match("^%s*(.-)%s*$")
+
+          return text
+        end
+
+        local cont = isContinuation(raw)
+        local sig = normalize(raw)
+
+        if not prevSig then
+          page = 1
+        else
+          if (not cont) and sig ~= prevSig then
+            page = page + 1
+          end
+        end
+
+        prevSig = sig
+
         line = 0
 
         addrow("", "", "")

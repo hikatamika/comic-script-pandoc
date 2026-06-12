@@ -20,10 +20,6 @@ function Writer(doc, opts)
     table.insert(rows, table.concat({a or "", b or "", c or ""}, "\t"))
   end
 
-  --[[ ⚙️ Named Pages ↓
-  (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
-  -- local page = ""
-  -- ⚙️ Auto Pages ↓
   local page = 0
   local speaker = ""
   local line = 0
@@ -37,11 +33,8 @@ function Writer(doc, opts)
       -- That's a Comic Script Page Element
       -- ⚙️ Select the heading level that represents pages in your doc. For me it's heading 1.
       if block.level == 1 then
-        -- Update page ID. Comes in Named Pages and Auto Pages
-        --[[ ⚙️ Named Pages ↓
-            (If you'd rather have page ID based on the page header's written name, uncomment the line below here and re-comment the line below Auto Pages.)]]
-        -- page = textify(block.content)
-        -- ⚙️ Auto Pages ↓
+        -- Update page ID.
+
         page = page + 1
         -- and reset line number.
         line = 0
