@@ -11,7 +11,7 @@ pandoc -f commonmark_x-yaml_metadata_block example-scripts/ames-guide.md --lua-f
 ```
 
 > [!warning]
-> The `-yaml_metadata_block` was important. Pandoc refused the file due to its YAML mapping values, without it.
+> The `-yaml_metadata_block` on `commonmark_x` was important. Pandoc refused the file due to its YAML mapping values, without it.
 
 > [!note]
 > Take note of the use of `--lua-filter em-to-double-dash.lua` in both.

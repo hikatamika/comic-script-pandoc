@@ -110,7 +110,7 @@ snrk
 
 ### Alice
 
-12. You should learn not to make personal remarks
+12. You should learn not to make personal remarks.
 
 ### Alice (Aside)
 
@@ -143,7 +143,7 @@ Alice's face, mid-expression-shift into an excited smile.\
 
 ## The March Hare confidently crosses his arms; the camera beside him. Alice is crossing her own back at him, bottom lip raised poutily.
 
-### March hare
+### March Hare
 
 17. Do you mean that you think you can find out the answer to it?
 
@@ -151,7 +151,7 @@ Alice's face, mid-expression-shift into an excited smile.\
 
 18. ***Exactly so!***
 
-### March hare
+### March Hare
 
 19. Then you should ***say*** what you ***mean.***
 
