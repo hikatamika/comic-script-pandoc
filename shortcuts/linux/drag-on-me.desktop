@@ -2,6 +2,6 @@
 Type=Application
 Name=Drag Comic Scripts Here
 Comment=Drag and drop comic scripts to convert using Pandoc
-Exec=./same-path-same-name.sh %F
+Exec=./the-shortcut-you-chose.sh %F
 Icon=utilities-terminal
 Terminal=true
