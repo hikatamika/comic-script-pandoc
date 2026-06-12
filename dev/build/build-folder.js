@@ -32,7 +32,11 @@ const srcReadme = root('manual.md');
 
 //SECTION - Proj Meta
 // Project title
-const projectName = 'Comic-Script-Pandoc'; 
+const projectName = 'Comic-Script-Pandoc';
+
+//Folder Prefix
+const topFolderPrefix = (suffix) =>
+  `${projectName}-v${version}-${suffix}`;
 
 //!SECTION - Proj Meta
 
@@ -61,7 +65,7 @@ try {
     // Top Level Folders
     platforms.forEach(({ name, shortcutSrc }) => {
       // ComicScriptPandoc
-      const topFolder = `${projectName}-v${version}-${name}`;
+      const topFolder = `topFolderPrefix(${name})`;
 
       // Common paths
       const topPath = resolve(buildTargetDir, topFolder);
@@ -116,7 +120,7 @@ try {
     //!SECTION - Making the platform folders + filling things that are the same
 
     //SECTION - The script example folder
-    const exFolder = `${projectName}-v${version}-Example Scripts`;
+    const exFolder = `topFolderPrefix(Example Scripts)`;
     mkdirSync(resolve(buildTargetDir, exFolder), { recursive: true });
     cpSync(root('example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
     //!SECTION - The script example folder
