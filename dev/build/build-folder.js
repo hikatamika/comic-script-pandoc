@@ -15,13 +15,6 @@ const projectRoot = resolve(currentDir, '../../');
 // Thing so I don't repeat root all the time
 const root = (...paths) => resolve(projectRoot, ...paths);
 
-// Get version from package.json
-const packageJsonPath = root('package.json');
-
-const { version } = JSON.parse(
-  readFileSync(packageJsonPath, 'utf8')
-);
-
 // Get to builds folder
 const buildTargetDir = root('..', 'builds', version);
 
@@ -37,6 +30,14 @@ const projectName = 'Comic-Script-Pandoc';
 //Folder Prefix
 const topFolderPrefix = (suffix) =>
   `${projectName}-v${version}-${suffix}`;
+
+//SECTION - Get version from  pagkage.json
+const packageJsonPath = root('package.json');
+
+const { version } = JSON.parse(
+  readFileSync(packageJsonPath, 'utf8')
+);
+//!SECTION - Get version from  pagkage.json
 
 //!SECTION - Proj Meta
 
@@ -72,6 +73,7 @@ try {
       const customPath = resolve(pandocPath, 'custom');
       const filtersPath = resolve(pandocPath, 'filters');
 
+      // Make the OS folders
       mkdirSync(topPath, { recursive: true });
 
       // The things that are the same per platform: pandoc(empty), shortcuts(empty), and the readmes
@@ -91,7 +93,7 @@ try {
       mkdirSync(customPath, { recursive: true });
       mkdirSync(filtersPath, { recursive: true });
 
-      // Copy the stuff to custom and filters
+      //SECTION Copy the stuff to custom and filters
       // For the writers, skip the per-writer-type folder groupings
       
       const writersDir = root('writers');
@@ -112,6 +114,7 @@ try {
       flattenCopy(writersDir, customDir);
 
       cpSync(root('filters'), filtersPath, { recursive: true });
+      //!SECTION Copy the stuff to custom and filters
 
       //SECTION - Filling the Platforms (While we're here)
       cpSync(
@@ -126,8 +129,10 @@ try {
     //!SECTION - Making the platform folders + filling things that are the same
 
     //SECTION - The script example folder
+    // Make it
     const exFolder = topFolderPrefix('Example-Scripts');
     mkdirSync(resolve(buildTargetDir, exFolder), { recursive: true });
+    // Fill it
     cpSync(root('example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
     //!SECTION - The script example folder
 
