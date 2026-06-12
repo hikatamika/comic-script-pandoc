@@ -56,7 +56,6 @@ const topLvlBuildDirs = platforms.map(p => p.name);
 //SECTION - Making the Folders
 // Create the folders... carefully…
 try {
-  if (!existsSync(buildTargetDir)) {
     // The build folder itself
     mkdirSync(buildTargetDir, { recursive: true });
     console.log(`Successfully created folder: ${buildTargetDir}`);
@@ -125,10 +124,6 @@ try {
     mkdirSync(resolve(buildTargetDir, exFolder), { recursive: true });
     cpSync(root('example-scripts'), resolve(buildTargetDir, exFolder), { recursive: true });
     //!SECTION - The script example folder
-
-  } else {
-    console.log(`Folder already exists: ${buildTargetDir}`);
-  }
 
 } catch (error) {
   console.error(`Failed to create directory:`, error.message);
