@@ -15,6 +15,10 @@ if "%~1"=="" goto end
 echo Converting "%~1"...
 
 @REM Change docx to your starting filetype on the -f line.
+@REM If you want to use a Pandoc filter, 
+@REM add a line after -f docx "$file" that says:
+@REM "--lua-filter the-filter-you-want.lua \"
+@REM make an additional --lua-filter line for each one you want.
 @REM Put the name of the writer.lua you want on the -t line.
 @REM I highly recommend putting the Pandoc Lua Writer in Pandoc's data directory,
 @REM …or next to your Linux launcher so you don't have to link it by absolute path.
