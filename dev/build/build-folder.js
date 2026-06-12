@@ -110,7 +110,7 @@ try {
       //SECTION - Filling the Platforms (While we're here)
       cpSync(
         root(`shortcuts/${shortcutSrc}`),
-        resolve(buildTargetDir, topFolder, 'shortcuts'),
+        resolve(topPath, 'shortcuts'),
         { recursive: true }
       );
       //!SECTION - Filling the Platforms
