@@ -54,3 +54,9 @@ I recommend using these as a base; copying and modifying them per comic project.
 ### Converting Your Comic Scripts
 
 From there, converting scripts should be as easy as dragging and dropping the script files onto the shortcut icon.
+
+## Using Filters (Optional)
+
+To use the provided Pandoc Filters in your conversions, use `--lua-filter the-filter-you-want.lua` between the `f docx "$file"` and `-t writer.lua` parts of a Pandoc command.
+
+Add additional `--lua-filter the-filter-you-want.lua`s for each filter you want to chain.

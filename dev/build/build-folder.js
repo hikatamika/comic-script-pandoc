@@ -28,7 +28,7 @@ const topLvlBuildDirs = ['Windows', 'Mac', 'Linux'];
 const samePlatDirs = ['pandoc', 'shortcuts'];
 const perPandocFolder = ['custom', 'filters'];
 
-const srcReadme = resolve(projectRoot, 'dev/build/build-readme.md');
+const srcReadme = resolve(projectRoot, 'manual.md');
 
 const archive = new ZipArchive({ zlib: { level: 9 } });
 
