@@ -1,6 +1,6 @@
 {
   "name": "comic-script-pandoc",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Pandoc LUA Writers for parsing comic scripts for digital lettering.",
   "main": "index.js",
   "scripts": {
