@@ -173,7 +173,7 @@ Alice's face, mid-expression-shift into an excited smile.\
 
 23. That's the same thing, you know.
 
-# PAGE 5 (L)
+# PAGE 5 (L) - 5 Panels
 
 ## The Hatter and the March Hare look at each other intelligently like they're philosophers from Ancient Greece, while the Dormouse sleep-nods in agreement between them.
 
