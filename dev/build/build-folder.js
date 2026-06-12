@@ -71,7 +71,7 @@ try {
     //!SECTION - Filling Mac
     
     //SECTION - Filling Linux
-    cpSync(resolve(projectRoot, 'shortcuts/mac'), resolve(buildTargetDir, 'Linux', 'shortcuts'), { recursive: true });
+    cpSync(resolve(projectRoot, 'shortcuts/linux'), resolve(buildTargetDir, 'Linux', 'shortcuts'), { recursive: true });
     //!SECTION - Filling Linux
 
     //SECTION - The script example folder
