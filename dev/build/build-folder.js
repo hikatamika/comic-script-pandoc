@@ -34,6 +34,9 @@ const platforms = [
   { name: 'Linux', shortcutSrc: 'linux' }
 ];
 
+const topLvlBuildDirs = platforms.map(p => p.name);
+const samePlatDirs = ['pandoc', 'shortcuts'];
+
 const srcReadme = resolve(projectRoot, 'manual.md');
 
 //!SECTION - Consts
