@@ -23,7 +23,7 @@ echo Converting "%~1"...
 @REM I highly recommend putting the Pandoc Lua Writer in Pandoc's data directory,
 @REM …or next to your Linux launcher so you don't have to link it by absolute path.
 @REM The input and output filenames are handled for you.
-@REM   Change .tsv to another file extension if need be.
+@REM Change .tsv to another file extension if need be.
 
 pandoc -f docx "%~1" -t writer.lua -o "%DEST%\%~n1.tsv"
 
