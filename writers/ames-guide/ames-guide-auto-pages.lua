@@ -64,7 +64,7 @@ function Writer(doc, opts)
         -- Print to a row!
         addrow(
         -- We put the page number from the last page we crossed, a ., and then the line number.
-        page .. "." .. tostring(line),
+        tostring(page) .. "." .. tostring(line),
         -- Then the name of the lettering element source.
         speaker,
         -- Finally we convert the line to plain text and shove it in.
@@ -84,7 +84,7 @@ function Writer(doc, opts)
         -- Make col1 the page.line number ID thing,
         -- col2 the lettering item source,
         -- and col 3 the line itself.
-        addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
+        addrow(tostring(page) .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
 
       -- Sometimes, SFX and Captions are read as paragraphs
@@ -95,7 +95,7 @@ function Writer(doc, opts)
         -- Make col1 the page.line number ID thing,
         -- col2 the lettering item source,
         -- and col3 the paragraph text.
-        addrow(page .. "." .. tostring(line), speaker, textify(block))
+        addrow(tostring(page) .. "." .. tostring(line), speaker, textify(block))
     end
   end
 

@@ -37,7 +37,7 @@ function Writer(doc, opts)
         line = line + 1
 
         addrow(
-        page .. "." .. tostring(line),
+        tostring(page) .. "." .. tostring(line),
         speaker,
         textify(item))
       end
@@ -49,13 +49,13 @@ function Writer(doc, opts)
 
         line = line + 1
 
-        addrow(page .. "." .. tostring(line), speaker, textify(blocks[i]))
+        addrow(tostring(page) .. "." .. tostring(line), speaker, textify(blocks[i]))
       end
 
       elseif block.t == "Para" then
         line = line + 1
   
-        addrow(page .. "." .. tostring(line), speaker, textify(block))
+        addrow(tostring(page) .. "." .. tostring(line), speaker, textify(block))
     end
   end
 
