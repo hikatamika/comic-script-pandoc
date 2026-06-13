@@ -83,9 +83,11 @@ function Writer(doc, opts)
         -- and reset line number.
         line = 0
 
-        -- Optional per-page line separator.
-        -- ⚙️ Comment off/on to toggle if you do/don't want blank rows as page separators.
+        -- Optional per-page line separators.
+        -- ⚙️ Comment off/on to toggle if you do/don't want blank page separators.
         addrow("", "", "")
+        -- ⚙️ Comment off/on to toggle if you do/don't want labeled page separators.
+        addrow("Page " .. tostring(page), "", "")
 
         -- If we come across a header that's a Comic Script Speaker/Caption/SFX Element
         -- ⚙️ Select the heading level that represents lettering element SOURCES (Speakers, SFX, Captions), not the lettering lines themselves. For me, this is heading level 3, skipping over 2, which represents panels.

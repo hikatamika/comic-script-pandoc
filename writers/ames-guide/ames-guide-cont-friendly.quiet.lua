@@ -63,6 +63,7 @@ function Writer(doc, opts)
         line = 0
 
         addrow("", "", "")
+        addrow("Page " .. tostring(page), "", "")
 
       elseif block.level == 3 then
         speaker = textify(block.content)
