@@ -20,9 +20,9 @@ function Writer(doc, opts)
     if l == "" then return end
 
     if l:match("^Page") or l == "P" then
+      page = page + 1
         addrow("", "", "")
         addrow("Page " .. tostring(page), "", "")
-      page = page + 1
       line = 0
       return
     end

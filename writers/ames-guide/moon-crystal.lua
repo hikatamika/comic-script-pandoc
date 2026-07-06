@@ -35,12 +35,12 @@ function Writer(doc, opts)
 
     -- Leave out Page markers
     if l:match("^Page") or l == "P" then
+      page = page + 1
         -- Optional per-page line separators.
         -- ⚙️ Comment off/on to toggle if you do/don't want blank page separators.
         addrow("", "", "")
         -- ⚙️ Comment off/on to toggle if you do/don't want labeled page separators.
         addrow("Page " .. tostring(page), "", "")
-      page = page + 1
       line = 0
       return
     end
