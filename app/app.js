@@ -110,13 +110,6 @@ const writers = Object.freeze({
     label: "Moon Crystal",
     supportedInput: ["md", "txt"],
     settings: {
-      ignoredSpeakers: [
-        {
-          "Description": true,
-          "Notes": true,
-          "Action": true
-        }
-      ],
       ignoredSpeakers: {
         type: "stringList",
         label: "Ignored Speakers",
