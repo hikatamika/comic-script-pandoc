@@ -1,19 +1,14 @@
--- GUI Version
+--[[ Moon Crystal Pandoc Lua Writer
+  https://github.com/hikatamika/comic-script-pandoc
+  Licensed under GNU AGPLv3
 
---[[
-  opts.variables = {
-      pageHeadingLvl = 1,
-      srcHeadingLvl = 3,
-
-      blankPageSeparators = true,
-
-      ignoredSpeakers = {
-          "Description",
-          "Notes",
-          "Action"
-      }
-  }
-]]
+  Options are marked with ⚙️ so you can Ctrl-F them better.]] -- Shorthand for Pandoc's stringify utility, with the bonus of getting rid of the rare (currently) inexplicable Pandoc ending spaces.
+--[[ Moon Crystal Pandoc Lua Writer
+  Converts comic scripts to a TSV lettering table.
+]] --
+--------------------------------------------------
+-- ⚙️ Speakers to ignore
+--------------------------------------------------
 local ignore = {Description = true, Action = true, Notes = true}
 
 local function textify(x) return pandoc.utils.stringify(x):gsub("%s+$", "") end

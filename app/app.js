@@ -17,7 +17,7 @@ const InputExt = Object.freeze({
 const writers = Object.freeze({
   "ames-guide-auto": {
     dir: "ames-guide",
-    lua: "ames-guide-auto-pages",
+    lua: "ames-guide-auto",
     label: "Ames Guide (Auto Numbering)",
     supportedInput: ["docx", "doc", "odt", "md"],
     settings: {
