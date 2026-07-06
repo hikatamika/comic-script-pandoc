@@ -6,8 +6,12 @@ function Writer(doc, opts)
 
   local rows = {}
 
-  local function addrow(a, b, c)
-    table.insert(rows, table.concat({a or "", b or "", c or ""}, "\t"))
+  local function addrow(id, speaker, text)
+    table.insert(rows, table.concat({
+      id or "",
+      speaker or "",
+      text or ""
+    }, "\t"))
   end
 
   local page = 0

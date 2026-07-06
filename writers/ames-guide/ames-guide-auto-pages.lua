@@ -15,9 +15,12 @@ function Writer(doc, opts)
   local rows = {}
 
   -- Here's the function that adds stuff to your comic lettering table row by row. The if/then stuff further down sends stuff to this.
-  local function addrow(a, b, c)
-    -- a is column 1 w/ the IDs, b is column 2 w/ the lettering source, and c is column 3 w/ the lettering line.
-    table.insert(rows, table.concat({a or "", b or "", c or ""}, "\t"))
+  local function addrow(id, speaker, text)
+    table.insert(rows, table.concat({
+      id or "",
+      speaker or "",
+      text or ""
+    }, "\t"))
   end
 
   local page = 0
