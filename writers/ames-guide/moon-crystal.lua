@@ -7,7 +7,7 @@
   Converts comic scripts to a TSV lettering table.
 ]] --
 --------------------------------------------------
--- Speakers to ignore
+-- ⚙️ Speakers to ignore
 --------------------------------------------------
 local ignore = {Description = true, Action = true, Notes = true}
 
