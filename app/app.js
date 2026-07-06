@@ -170,6 +170,18 @@ const filters = Object.freeze({
 );
 } */
 
+// How it should look like
+/*{
+  userSettings = {
+    pageHeadingLvl: 2,
+    srcHeadingLvl: 4,
+    ignoredSpeakers: [
+        "Description",
+        "Narrator"
+    ]
+  }
+}*/
+
 // How to change them when the user swaps out
 /* {
   currentWriter = "ames-guide-auto";
